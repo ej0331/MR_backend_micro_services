@@ -1,5 +1,6 @@
 from dotenv import load_dotenv
 from flask import Blueprint, request, current_app
+from flask_login import login_required
 from marshmallow import ValidationError
 from validations.student_login_schema import StudentLoginSchema
 from validations.teacher_login_schema import TeacherLoginSchema
@@ -9,6 +10,15 @@ from usecases.auth_service import AuthService
 auth_blueprint = Blueprint('auth_blueprint', __name__)
 auth_service = AuthService()
 load_dotenv()
+
+
+@auth_blueprint.route('/me', methods=['GET'])
+@login_required
+def me():
+    try:
+        return make_success_response(None, 200)
+    except Exception as err:
+        return make_error_response(err, 400)
 
 
 @auth_blueprint.route('/teacher/login', methods=['POST'])
