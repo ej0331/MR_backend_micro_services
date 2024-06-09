@@ -1,6 +1,8 @@
 from dotenv import load_dotenv
 from flask import Blueprint, request, current_app
-from flask_login import login_required
+from flask_login import logout_user, login_required
+from flask_principal import Identity, identity_changed
+
 from marshmallow import ValidationError
 from validations.student_login_schema import StudentLoginSchema
 from validations.teacher_login_schema import TeacherLoginSchema
@@ -66,3 +68,12 @@ def student_login():
     except Exception as e:
         messages.append(e)
         return make_error_response(messages, 500)
+    
+
+@auth_blueprint.route('/logout', methods=['POST'])
+@login_required
+def logout():
+    logout_user()
+    identity_changed.send(current_app._get_current_object(),
+                          identity=Identity(None))
+    return make_success_response(None, 200)
