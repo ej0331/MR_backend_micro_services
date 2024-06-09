@@ -56,5 +56,9 @@ def init_seeder(app: Flask):
 
 def init_blueprints(app: Flask):
     prefix = '/api'
-    from adapters.auth import auth_blueprint
+    from adapters.auth_bp import auth_blueprint
+    from adapters.student_bp import student_blueprint
+    from adapters.class_bp import class_blueprint
     app.register_blueprint(auth_blueprint, url_prefix=prefix)
+    app.register_blueprint(student_blueprint, url_prefix=prefix)
+    app.register_blueprint(class_blueprint, url_prefix=prefix)
