@@ -13,4 +13,4 @@ COPY . /app
 
 RUN pip install -r ./requirements.txt
 
-CMD ["flask", "run"]
+CMD ["flask", "run", "--port", "5002"]
