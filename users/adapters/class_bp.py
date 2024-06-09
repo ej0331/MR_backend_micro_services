@@ -13,6 +13,10 @@ class_blueprint = Blueprint('class_blueprint', __name__)
 class_service = ClassService()
 
 
+@class_blueprint.route('/classes/health-check', methods=['GET'])
+def health_check():
+    return make_success_response('OK', 200)
+
 @class_blueprint.route('/classes', methods=['GET'])
 def index():
     messages = []

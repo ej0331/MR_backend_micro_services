@@ -14,6 +14,11 @@ student_blueprint = Blueprint('student_blueprint', __name__)
 student_service = StudentService()
 
 
+@student_blueprint.route('/students/health-check', methods=['GET'])
+@login_required
+def health_check():
+    return make_success_response('OK', 200)
+
 @student_blueprint.route('/students', methods=['GET'])
 @login_required
 def index():
