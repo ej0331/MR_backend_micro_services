@@ -9,8 +9,10 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-COPY . /app
+COPY . .
 
 RUN pip install -r ./requirements.txt
 
-CMD ["flask", "run"]
+EXPOSE 5000
+
+CMD ["flask", "run", "--host", "0.0.0.0", "--port", "5000"]

@@ -33,6 +33,8 @@ services:
     build:
       context: ./users
       dockerfile: Dockerfile
+    depends_on:
+      - mysql_db
     ports:
       - "5500:5000"
     networks:
@@ -42,6 +44,8 @@ services:
     build:
       context: ./records
       dockerfile: Dockerfile
+    depends_on:
+      - mysql_db
     ports:
       - "5001:5001"
     networks:
@@ -52,6 +56,8 @@ services:
     build:
       context: ./questions
       dockerfile: Dockerfile
+    depends_on:
+      - mysql_db
     ports:
       - "5002:5002"
     networks:
